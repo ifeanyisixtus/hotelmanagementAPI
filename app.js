@@ -13,7 +13,8 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
-//base api
+// remove 2000
+//
 app.get("/", (req, res) => {
   res.status(200).send({ message: MESSAGES.FETCHED, success: true });
 });
@@ -79,12 +80,11 @@ app.get("/api/v1/room-search", async (req, res) => {
       .send({ message: err.message || MESSAGES.ERROR, success: false });
   }
 });
-
 // fetch all room types
 
-app.get("/api/v1/room-types", async (req, res) => {
+app.get("/api/v1/rooms-type", async (req, res) => {
   try {
-    const roomTypes = await Controller.getAllRoomTypes();
+    const roomTypes = await Controller.getAllRoomType();
     res
       .status(200)
       .send({ message: MESSAGES.FETCHED, success: true, data: roomTypes });
@@ -139,7 +139,7 @@ app.post("/api/v1/room", async (req, res) => {
 app.patch("/api/v1/room/:roomId", async (req, res) => {
   try {
     const data = await Controller.editRoomById(req.params.roomId);
-    res.send(201).send({ message: MESSAGES.UPDATED, suceess: true, data });
+    res.status(201).send({ message: MESSAGES.UPDATED, suceess: true, data });
   } catch (err) {
     res
       .status(500)
@@ -151,7 +151,7 @@ app.patch("/api/v1/room/:roomId", async (req, res) => {
 app.patch("/api/v1/room-type/:roomTypeId", async (req, res) => {
   try {
     const data = await Controller.editRoomTypeById(req.params.roomTypeId);
-    res.send(201).send({ message: MESSAGES.UPDATED, suceess: true, data });
+    res.status(201).send({ message: MESSAGES.UPDATED, suceess: true, data });
   } catch (err) {
     res
       .status(500)
@@ -163,7 +163,7 @@ app.patch("/api/v1/room-type/:roomTypeId", async (req, res) => {
 app.delete("/api/v1/room/:roomId", async (req, res) => {
   try {
     const data = await Controller.deleteRoomById(req.params.roomId);
-    res.send(200).send({ message: MESSAGES.DELETED, suceess: true, data });
+    res.status(200).send({ message: MESSAGES.DELETED, suceess: true, data });
   } catch (err) {
     res
       .status(500)
@@ -174,7 +174,7 @@ app.delete("/api/v1/room/:roomId", async (req, res) => {
 app.delete("/api/v1/room-type/:roomTypeId", async (req, res) => {
   try {
     const data = await Controller.deleteRoomTypeById(req.params.roomTypeId);
-    res.send(201).send({ message: MESSAGES.DELETED, suceess: true, data });
+    res.status(201).send({ message: MESSAGES.DELETED, suceess: true, data });
   } catch (err) {
     res
       .status(500)

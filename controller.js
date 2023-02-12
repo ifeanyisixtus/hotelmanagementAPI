@@ -3,7 +3,7 @@ const RoomType = require("./RoomTypeModel");
 
 class Controller {
   async getAllRooms() {
-    return await Person.find({}, "-__v");
+    return await Room.find({}, "-__v");
   }
 
   async addRoom(room) {
@@ -62,7 +62,7 @@ class Controller {
   }
 
   async deleteRoomTypeById(id) {
-    return await RoomType.findoneAndDelete({ _id: id });
+    return await RoomType.findOneAndDelete({ _id: id });
   }
 }
 
